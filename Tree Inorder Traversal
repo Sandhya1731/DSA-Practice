@@ -45,5 +45,29 @@ public:
              node=node->right;
         }
         return ans;
+        
+        
+  // Morris Traversal
+  TreeNode* current=root;
+    vector<int> v;
+    while(current)
+    {
+        if(!current->left)
+        {
+          v.push_back(current->val);
+          current=current->right;
+        }
+        else{
+            TreeNode* temp=current->left;
+            while(temp->right)
+            {
+                temp=temp->right;
+            }
+            temp->right=current;
+            current=current->left;
+            temp->right->left=NULL;
+        }
+    }
+    return v;
     }
 };
