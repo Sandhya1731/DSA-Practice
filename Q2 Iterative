@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+         vector<int>v;
+         stack<TreeNode* >s;
+         s.push(root);
+         while(s.size())
+         {
+            while(s.top()!=NULL && s.top()->left)s.push(s.top()->left);
+            if(s.top()==NULL)s.pop();
+            if(s.size()==0)break;
+            TreeNode*right=s.top()->right;
+            v.push_back(s.top()->val);
+            s.pop();
+            if(right)
+            {
+                s.push(right);
+            }
+            else s.push(NULL);
+         }
+         return v;
+    }
+};
