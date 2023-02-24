@@ -24,4 +24,32 @@ public:
         v.push_back(root->val);
          return v;
     }
+    
+    
+    
+    
+       stack<pair<TreeNode*,int>> s;
+       vector<int> v;
+       TreeNode* node=root;
+       while(node||!s.empty())
+       { 
+           if(node){
+        s.push({node,0});
+        node=node->left;
+           }
+           else{
+           pair<TreeNode*,int> p=s.top();
+           s.pop();
+           if(p.second==0)
+           {
+             s.push({p.first,1});
+             node=p.first->right;
+           }
+           else{
+               v.push_back(p.first->val);
+           }   
+           }
+
+       }
+       return v;
 };
