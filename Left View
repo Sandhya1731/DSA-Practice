@@ -31,4 +31,30 @@ vector<int> leftView(Node *root)
        }
    }
    return v;
+   
+   
+   
+   
+   
+   void helper(Node* root, int h,vector<int>&v){
+    if(root==NULL){
+        return ;
+    }
+    if(v.size()==h){
+        v.push_back(root->data);
+    }
+    helper(root->left,h+1,v);
+    helper(root->right,h+1,v);
+    return;
+    
+}
+//Function to return a list containing elements of left view of the binary tree.
+vector<int> leftView(Node *root)
+{
+// recursive solution
+vector<int>v;
+
+helper(root,0,v);
+return v;
+}
 }
