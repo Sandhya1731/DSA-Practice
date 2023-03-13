@@ -1,0 +1,28 @@
+//using set to remove duplicates
+
+void allsubsets(vector<int>&nums,set<vector<int>>&s,int i,vector<int>&temp){
+    if(i==nums.size()){
+        vector<int> temp2=temp;
+        sort(temp2.begin(),temp2.end());
+        s.insert(temp2);
+        return;
+    }
+    temp.push_back(nums[i]);
+    allsubsets(nums,s,i+1,temp);
+    temp.pop_back();
+    allsubsets(nums,s,i+1,temp);
+}
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        set<vector<int>>s;
+        vector<vector<int>>ans;
+        vector<int> temp;
+        allsubsets(nums,s,0,temp);
+        for (auto it = s.begin();
+         it != s.end();
+         it++) {
+          ans.push_back(*it);
+    }
+    return ans;
+    }
+    
+    https://leetcode.com/problems/subsets-ii/description/
