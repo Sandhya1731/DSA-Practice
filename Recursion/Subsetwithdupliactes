@@ -26,3 +26,32 @@ void allsubsets(vector<int>&nums,set<vector<int>>&s,int i,vector<int>&temp){
     }
     
     https://leetcode.com/problems/subsets-ii/description/
+
+
+
+//without sets
+void allsubsets(vector<int> nums,int i,vector<vector<int>>&ans,vector<int>&temp){
+    if(i==nums.size()){
+        ans.push_back(temp);
+        return;
+
+    }
+temp.push_back(nums[i]);
+allsubsets(nums,i+1,ans,temp);
+temp.pop_back();
+int x=nums[i];
+i++;
+while(i<nums.size()&&nums[i]==x){
+    i++;
+}
+// i= upper_bound(nums.begin(), nums.end(), nums[i]) - nums.begin();
+allsubsets(nums,i,ans,temp);
+}
+vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>ans;
+        vector<int> temp;
+        allsubsets(nums,0,ans,temp);
+        
+    return ans;
+    }
