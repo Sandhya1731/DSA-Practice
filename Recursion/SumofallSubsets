@@ -14,3 +14,22 @@ void sumofall(vector<int> arr,int index, int n, int sum, vector<int>& ans){
         return ans;
         
     }
+// iterative solution 
+ vector<int> subsetSums(vector<int> arr, int N)
+    {
+        // Write Your Code here
+        vector<int> ans;
+        long long total=1<<N;// for making 2^n
+        for(long long i=0;i<total;i++)
+        { long long sum=0;
+            for( int j=0;j<N;j++)
+            {
+                if(i&1<<j)
+                {
+                    sum+=arr[j];
+                }
+            }
+            ans.push_back(sum);
+        }
+      return ans;  
+     }
