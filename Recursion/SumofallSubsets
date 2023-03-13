@@ -33,3 +33,18 @@ void sumofall(vector<int> arr,int index, int n, int sum, vector<int>& ans){
         }
       return ans;  
      }
+     
+     //iterative effective solution
+     vector<int> subsetSums(vector<int> arr, int N)
+     {
+     vector<int> ans={0};
+     for(int i=0;i<N;i++){
+      
+         int size=ans.size();
+         for(int j=0;j<size;j++){
+             ans.push_back(arr[i]+ans[j]);
+         }
+     }
+     return ans;
+   }
+};
