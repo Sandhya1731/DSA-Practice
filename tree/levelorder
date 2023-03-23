@@ -1,0 +1,57 @@
+//Function to return the level order traversal of a tree.
+    // vector<int> levelOrder(Node* node)
+    // {
+    //   //Your code here
+    //   vector<int> v;
+    //   if(node==NULL)return v;
+    //   queue<Node*> q;
+    //   q.push(node);
+    //   while(!q.empty()){
+    //       Node* temp=q.front();
+    //       q.pop();
+    //       v.push_back(temp->data);
+    //       if(temp->left!=NULL)
+    //       {
+    //           q.push(temp->left);
+    //       }
+    //       if(temp->right!=NULL)
+    //       {
+    //           q.push(temp->right);
+    //       }
+          
+    //   }
+    //   return v;
+      
+    // }
+    
+    // recursion
+    //first find height 
+    int height(Node* node){
+        if(node==NULL){
+            return 0;
+        }
+        int left=height(node->left);
+        int right=height(node->right);
+        return max(left,right)+1;
+    }
+    
+    void traverse(Node* node,vector<int> & v,int height, int curr_h)
+    {
+        if(node==NULL){
+            return;
+        }
+        if(curr_h==height){
+            v.push_back(node->data);
+            return;
+        }
+        traverse(node->left,v,height, curr_h+1);
+        traverse(node->right,v,height, curr_h+1);
+    }
+    vector<int> levelOrder(Node* node){
+        vector<int> v;
+    int levels=height(node);
+    for( int i=0;i<levels;i++){
+traverse(node,v,i,0);
+    }
+    return v;
+    }
