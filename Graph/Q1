@@ -1,0 +1,5 @@
+  long long count(int n) {
+        
+        int total_edges=n*(n-1)/2;
+        return 1ll*pow(2,total_edges);
+    }
