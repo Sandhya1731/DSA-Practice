@@ -1,0 +1,20 @@
+https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+ void dfs(vector<int>adj[],vector<int>&vis,int i,vector<int>&ans)
+    {
+        vis[i]=1;
+        ans.push_back(i);
+        for(auto it:adj[i])
+        {
+            if(!vis[it])
+            {
+                dfs(adj,vis,it,ans);
+            }
+        }
+    }
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        // Code here
+        vector<int>vis(V,0);
+        vector<int>ans;
+        dfs(adj,vis,0,ans);
+        return ans;
+    }
