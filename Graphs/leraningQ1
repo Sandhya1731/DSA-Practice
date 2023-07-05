@@ -1,0 +1,11 @@
+https://practice.geeksforgeeks.org/problems/graph-and-vertices/1
+
+class Solution {
+  public:
+    long long count(int n) {
+
+        int total_edges=n*(n-1)/2;
+        return 1ll*pow(2,total_edges);
+    }
+    
+};
