@@ -1,0 +1,69 @@
+//https://practice.geeksforgeeks.org/problems/number-of-enclaves/1
+
+  void bfs(vector<vector<int>>&grid,int x,int y,vector<vector<int>>&vis)
+  {
+      int n=grid.size();
+        int m=grid[0].size();
+      vis[x][y]=1;
+      queue<pair<int,int>>q;
+      q.push({x,y});
+      int row[] = {-1, 0, +1, 0};
+       int col[] = {0, 1, 0, -1};
+      while(!q.empty())
+      {
+          int X=q.front().first;
+          int Y=q.front().second;
+          q.pop();
+          for(int i=0;i<4;i++)
+          {
+            int nrow = X + row[i];
+            int ncol = Y + col[i]; 
+            if(nrow >=0 && nrow <n && ncol >= 0 && ncol < m 
+            && !vis[nrow][ncol] && grid[nrow][ncol] == 1) 
+            {
+                vis[nrow][ncol]=1;
+                q.push({nrow,ncol});
+            }
+          }
+      }
+  }
+    int numberOfEnclaves(vector<vector<int>> &grid) {
+        // Code here
+        int n=grid.size();
+        int m=grid[0].size();
+        int count=0;
+        vector<vector<int>>vis(n,vector<int>(m,0));
+        for(int j=0;j<m;j++)
+        {
+            if(grid[0][j]==1&&!vis[0][j])
+            {
+                bfs(grid,0,j,vis);
+            }
+            if(grid[n-1][j]==1&&!vis[n-1][j])
+            {
+                bfs(grid,n-1,j,vis);
+            }
+        }
+       for(int i=0;i<n;i++)
+        {
+            if(grid[i][0]==1&&!vis[i][0])
+            {
+                bfs(grid,i,0,vis);
+            }
+            if(grid[i][m-1]==1&&!vis[i][m-1])
+            {
+                bfs(grid,i,m-1,vis);
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(grid[i][j]==1&&vis[i][j]==0)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
