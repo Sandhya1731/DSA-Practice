@@ -1,0 +1,37 @@
+ public:
+    // Function to detect cycle in an undirected graph.
+    bool bfs(int V, vector<int> adj[],int n,vector<int>&vis)
+    {
+        vis[n]=1;
+        queue<pair<int,int>>q;
+        q.push({n,-1});
+        
+        while(q.size())
+        {
+            int child=q.front().first;
+            int parent=q.front().second;
+            q.pop();
+            for(int i=0;i<adj[child].size();i++)
+            {
+                if(!vis[adj[child][i]])
+                {
+                    vis[adj[child][i]]=1;
+                    q.push({adj[child][i],child});
+                }
+                else if(adj[child][i]!=parent) return true;
+            }
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        vector<int>vis(V,0);
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])
+            {
+                if(bfs(V,adj,i,vis))return true;
+            }
+        }
+        return false;
+    }
