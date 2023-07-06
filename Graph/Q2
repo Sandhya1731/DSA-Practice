@@ -1,0 +1,13 @@
+ vector<vector<int>> printGraph(int V, vector<int> adj[]) {
+        // Code here
+         vector<vector<int>>ans;
+         for(int i=0;i<V;i++)
+         {
+             int n=adj[i].size();
+             vector<int>v;
+             v.push_back(i);
+             for(int j=0;j<n;j++)v.push_back(adj[i][j]);
+             ans.push_back(v);
+         }
+         return ans;
+    }
