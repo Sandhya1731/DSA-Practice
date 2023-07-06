@@ -1,0 +1,38 @@
+//https://practice.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1
+	vector<vector<int>>nearest(vector<vector<int>>grid)
+	{
+	    // Code here
+	    int n=grid.size();
+	    int m=grid[0].size();
+	    vector<vector<int>>dis(n,vector<int>(m,INT_MAX));
+	    queue<pair<int,int>>q;
+	    for(int i=0;i<n;i++)
+	    {
+	        for(int j=0;j<m;j++)
+	        {
+	            if(grid[i][j]==1)
+	            {
+	                dis[i][j]=0;
+	                q.push({i,j});
+	            }
+	        }
+	    }
+	    vector<int>X={-1,0,1,0};
+	    vector<int>Y={0,1,0,-1};
+	    while(!q.empty())
+	    {
+	        int x=q.front().first;
+	        int y=q.front().second;
+	        q.pop();
+	        for(int i=0;i<4;i++)
+	        {
+	            if(x+X[i]>=0&&x+X[i]<n&&y+Y[i]>=0&&y+Y[i]<m&&grid[x+X[i]][y+Y[i]]==0&&dis[x+X[i]][y+Y[i]]==INT_MAX)
+	            {
+	               
+	                   dis[x+X[i]][y+Y[i]]=dis[x][y]+1; 
+	                   q.push({x+X[i],y+Y[i]});
+	            }
+	        }
+	    }
+	    return dis;
+	}
