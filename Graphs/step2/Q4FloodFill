@@ -1,0 +1,29 @@
+https://practice.geeksforgeeks.org/problems/flood-fill-algorithm1856/1
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        // Code here 
+        
+        int old=image[sr][sc];
+        if(old==newColor)return image;
+        image[sr][sc]=newColor;
+        queue<pair<int,int>>q;
+        q.push({sr,sc});
+
+        vector<int> xi={-1,0,1,0};
+        vector<int>yi={0,1,0,-1};
+        while(!q.empty())
+        {
+            auto it=q.front();
+            int x=it.first;
+            int y=it.second;
+            q.pop();
+            for(int i=0;i<4;i++)
+            {
+                if(x+xi[i]>=0&&x+xi[i]<image.size()&&y+yi[i]>=0&&y+yi[i]<image[0].size()&&image[x+xi[i]][y+yi[i]]==old)
+                {
+                      
+                    image[x+xi[i]][y+yi[i]]=newColor;
+                    q.push({x+xi[i],y+yi[i]});
+                }
+            }
+        }
+        return image;}
