@@ -1,0 +1,40 @@
+vector<vector<int>> floodFill(vector<vector<int>>& v, int sr, int sc, int newColor) {
+        // Code here 
+        queue<pair<int,int>>q;
+        int n=v.size();
+        int m=v[0].size();
+        q.push({sr,sc});
+        int color=v[sr][sc];
+        if(color==newColor)return v;
+        v[sr][sc]=newColor;
+        while(q.size())
+        {
+               int a=q.front().first;
+               int b=q.front().second;
+               q.pop();
+               if(a-1>=0 && v[a-1][b]==color)
+               {
+                   v[a-1][b]=newColor;
+                   q.push({a-1,b});
+               }
+               if(a+1<n && v[a+1][b]==color)
+               {
+                   v[a+1][b]=newColor;
+                   q.push({a+1,b});
+               }
+               if(b-1>=0 && v[a][b-1]==color)
+               {
+                   v[a][b-1]=newColor;
+                   q.push({a,b-1});
+               }
+               if(b+1<m && v[a][b+1]==color)
+               {
+                   v[a][b+1]=newColor;
+                   q.push({a,b+1});
+               }
+              
+           }
+        
+      
+        return v; 
+    }
