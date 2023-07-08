@@ -1,0 +1,48 @@
+//https://practice.geeksforgeeks.org/problems/word-ladder-ii/1
+vector<vector<string>> findSequences(string beginWord, string endWord, vector<string>& wordList) {
+        // code here
+       unordered_set<string> s;
+       vector<vector<string>>ans;
+        for( int i=0;i<wordList.size();i++)
+        {
+            s.insert(wordList[i]);
+        }
+        queue<vector<string>> q;
+        q.push({beginWord});
+        while(!q.empty())
+        {int siz=q.size();
+        unordered_set<string> delele;
+        while(siz){
+            vector<string> temp=q.front();
+            q.pop();
+            string curr=temp[temp.size()-1];
+            if(curr==endWord)
+            {
+                ans.push_back(temp);
+            }
+            else{
+                
+            for(int i=0;i<curr.size();i++)
+            {   string temp2=curr;
+                for(int j=0;j<26;j++)
+                {
+                    temp2[i]='a'+j;
+                    if(s.find(temp2)!=s.end())
+                    {   
+                        delele.insert(temp2);
+                        vector<string> spush=temp;
+                        spush.push_back(temp2);
+                        q.push(spush);
+                    }
+                }
+            }
+            }
+            siz--;
+        }
+        for(auto st:delele)
+        {
+            s.erase(st);
+        }
+        }
+        return ans;
+    }
