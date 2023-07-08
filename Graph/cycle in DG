@@ -1,0 +1,22 @@
+ bool helper(int &k,  vector<int> *adj ,vector<int>&vis ,vector<int>&vis2)
+    {
+        if(vis2[k]==1)return true;
+        if(vis[k]==1)return false;
+        vis[k]=1;
+        vis2[k]=1;
+        int m=adj[k].size();
+        for(int i=0;i<m;i++)if(helper(adj[k][i],adj,vis,vis2))return true;
+        vis2[k]=0;
+        return false;
+    }
+    bool isCyclic(int n, vector<int> adj[]) {
+        // code here
+         vector<int>vis2(n,0);
+         vector<int> vis(n,0);
+        for(int i=0;i<n;i++)
+        {
+            if(vis[i]==0 && helper(i,adj,vis,vis2)) return true;
+        }
+        return false;
+    }
+};
