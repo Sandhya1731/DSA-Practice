@@ -1,0 +1,36 @@
+//https://practice.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1
+  vector<int> shortestPath(vector<vector<int>>& edges, int n,int m, int src){
+        // code here
+        vector<int>adj[n];
+    for(int i=0;i<m;i++)
+    {
+        vector<int> temp=edges[i];
+        adj[temp[0]].push_back(temp[1]);
+        adj[temp[1]].push_back(temp[0]);
+    }
+  vector<int>dis(n,INT_MAX);
+    queue<int>q;
+    q.push(src);
+    dis[src]=0;
+    while(!q.empty())
+    {
+        int node=q.front();
+        q.pop();
+        for(auto it:adj[node])
+        { int distance=dis[node]+1;
+            if(distance<dis[it])
+            {
+                dis[it]=distance;
+                q.push(it);
+            }
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(dis[i]==INT_MAX)
+        {
+            dis[i]=-1;
+        }
+    }
+    return dis;
+    }
