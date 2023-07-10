@@ -1,0 +1,40 @@
+//https://takeuforward.org/data-structure/g-36-shortest-distance-in-a-binary-maze/
+ int shortestPath(vector<vector<int>> &grid, pair<int, int> source,
+                     pair<int, int> destination) {
+        // code here
+        int n=grid.size();
+        int m=grid[0].size();
+         if (source.first == destination.first &&
+            source.second == destination.second)
+            return 0;
+        if(grid[source.first][source.second]==0||grid[destination.first][destination.second]==0)
+        return -1;
+        vector<vector<int>>vis(n,vector<int>(m,INT_MAX));
+        vis[source.first][source.second]=0;
+       queue<vector<int>>q;
+        q.push({source.first,source.second});
+        vector<int>dirx={-1,0,1,0};
+        vector<int>diry={0,1,0,-1};
+        while(!q.empty())
+        {
+            auto temp=q.front();
+            q.pop();
+        
+            int i=temp[0];
+            int j=temp[1];
+
+            for(int k=0;k<4;k++)
+            {
+               int nrow=i+dirx[k];
+               int ncol=j+diry[k];
+               if(nrow>=0&&nrow<n&&ncol>=0&&ncol<m&&grid[nrow][ncol]==1&&vis[nrow][ncol]>vis[i][j]+1)
+               {
+                   vis[nrow][ncol]=vis[i][j]+1;
+                   
+                               if(nrow==destination.first&&ncol==destination.second) return vis[nrow][ncol];
+                   q.push({nrow,ncol});
+               }
+            }
+        }
+        return -1;
+        
