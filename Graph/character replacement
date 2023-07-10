@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int characterReplacement(string s, int m) {
+        int ans=m;
+        int n=s.size();
+        
+        for(int i=0;i<26;i++)
+        {
+            int k=m;
+            int c=0;
+            queue<int>q;
+            char temp='A'+i;
+            int j=0;
+            while(j<n)
+            {
+                if(s[j]==temp)
+                {
+                    j++;
+                    c++;
+                }
+                else if(k!=0 )
+                {
+                    k--;
+                    q.push(j);
+                    j++;
+                    c++;
+                }
+                else if(q.size())
+                {
+                    c=j-q.front();
+                    q.pop();
+                    q.push(j);
+                    j++;
+                }
+                else
+                {
+                   c=0;
+                   j++;
+                } 
+                ans=max(ans,c);
+            }
+        }
+        return ans;
+    } 
+};
