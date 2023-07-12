@@ -1,0 +1,33 @@
+//https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1
+   int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // code here
+        typedef pair<int,pair<int,int>> p;
+        vector<int>vis(V,0);
+        priority_queue<p,vector<p>,greater<p>>pq;
+        int sum=0;
+        pq.push({0,{0,-1}});
+        while(!pq.empty())
+        {
+            p temp=pq.top();
+            pq.pop();
+            int weight=temp.first;
+            int node=temp.second.first;
+            int parent=temp.second.second;
+            
+            if(!vis[node])
+            {  vis[node]=1;
+                sum+=weight;
+                for(auto it:adj[node])
+                {
+                    int w=it[1];
+                    int v=it[0];
+                    if(!vis[v])
+                  pq.push({w,{v,node}});   
+                }
+            }
+            
+        }
+        //using this parent we can chehck if parent !=-1 then inside if we could push this node where we are doing vis=1 in mst 
+        return sum;
+    }
