@@ -1,0 +1,32 @@
+class Solution
+{
+    public:
+    //Function to merge two nodes a and b.
+    void union_( int a, int b, int par[], int rank1[]) 
+    {
+        //code here
+        int upara=findupar(a,par);
+        int uparb=findupar(b,par);
+        if(upara==uparb)return;
+        if(rank1[upara]>=rank1[uparb])
+        {
+            par[uparb]=upara;
+            rank1[upara]+=rank1[uparb];
+        }
+        else{
+            par[upara]=uparb;
+            rank1[uparb]+=rank1[upara];
+        }
+    }
+    int findupar(int x,int par[])
+    {
+        if(x==par[x])return x;
+        return par[x]=findupar(par[x],par);
+    }
+    //Function to check whether 2 nodes are connected or not.
+    bool isConnected(int x,int y, int par[], int rank1[])
+    {
+        //code here
+        return findupar(x,par)==findupar(y,par);
+    }
+};
