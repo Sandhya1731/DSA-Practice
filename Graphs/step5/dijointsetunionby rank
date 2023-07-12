@@ -1,0 +1,39 @@
+//https://practice.geeksforgeeks.org/problems/union-find/1
+class Solution
+{
+    public:
+    //Function to merge two nodes a and b.
+    void union_( int a, int b, int par[], int rank1[]) 
+    {
+        //code here
+        int upara=findupar(a,par);
+        int uparb=findupar(b,par);
+        if(upara==uparb)return ;
+        if(rank1[upara]>rank1[uparb])
+        {
+            par[upara]=uparb;
+            
+        }
+        else if(rank1[upara]<rank1[uparb])
+        {
+            par[upara]=uparb;
+        }
+       else{
+           par[uparb]=upara;
+           rank1[upara]++;
+       } 
+    }
+    int findupar(int x,int par[])
+    {
+        if(par[x]==x)return x;
+        return par[x]=findupar(par[x],par);
+    }
+    //Function to check whether 2 nodes are connected or not.
+    bool isConnected(int x,int y, int par[], int rank1[])
+    {
+        //code here
+        int uparx=findupar(x,par);
+        int upary=findupar(y,par);
+        return uparx==upary;
+    }
+};
