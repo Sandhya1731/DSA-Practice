@@ -1,0 +1,82 @@
+// return kth largest element
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Approach 1: sort the array and return kth element from end. Time complexity : O(nlogn)
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        return nums[nums.size()-k];
+    }
+};
+
+// Approach 2: create a max heap and and call extraxt max k times. Time complexity : O(n + kLogn)
+ int kthSmallest(int arr[], int l, int r, int k) {
+        //code here
+        priority_queue<int>q;
+        while(l<k){
+            q.push(arr[l]);
+            l++;
+        }
+        while(l<=r){
+            if(q.top()>arr[l]){
+                q.pop();
+                q.push(arr[l]);
+            }
+            l++;
+        }
+        return q.top();
+    }
+//Approach 3:Quickselect
+ //Pick a pivot element, move it to its correct position and partition the array around it. 
+// Stop at the point where pivot itself is k’th smallest element. Recur for one of sides of the pivot according to the position of it. 
+// Worst case TC - O(n^2), Average TC - O(n) 
+class Solution{
+    public:
+    // arr : given array
+    // l : starting index of the array i.e 0
+    // r : ending index of the array i.e size-1
+    // k : find kth smallest element and return using this function
+    int partition(int arr[], int l, int r)
+{
+    int x = arr[r], i = l;
+    for (int j = l; j <= r - 1; j++) {
+        if (arr[j] <= x) {
+            swap(&arr[i], &arr[j]);
+            i++;
+        }
+    }
+ 
+    swap(&arr[i], &arr[r]);
+    return i;
+}
+void swap(int* a, int* b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+    int kthSmallest(int arr[], int l, int r, int K) {
+        //code here
+        // Partition the array around last element and get
+        // position of pivot element in sorted array
+        int pos = partition(arr, l, r);
+ 
+        // If position is same as k
+        if (pos== K - 1)
+            return arr[pos];
+        if (pos> K - 1) // If position is more, recur
+                             // for left subarray
+            return kthSmallest(arr, l, pos - 1, K);
+ 
+        // Else recur for right subarray
+        return kthSmallest(arr, pos + 1, r,
+                           K);
+    
+ 
+    // If k is more than number of elements in array
+
+    }
+};
