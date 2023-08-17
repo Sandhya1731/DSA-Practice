@@ -1,0 +1,145 @@
+//implement stack using arrays 
+class Stack{
+	int  *arr;
+	int size;
+	int top;
+	public:
+		Stack(){
+			top=-1;
+			size=1000;
+			arr=new int [size];
+		}
+		int peek(){
+			if(!isEmpty()){
+				return arr[top];
+			}	
+		}
+		
+		void push(int x){
+		if(!isFull()){
+				top++;
+				arr[top]=x;
+		}
+			
+		}
+		void pop(){
+			if(!isEmpty()){
+				top--;
+			}
+			
+		}
+		bool isEmpty(){
+			if(top==-1){
+				cout<<"stack is empty";
+				return true;
+			}
+			
+			return false;
+		}
+		bool isFull(){
+			if(top==size)
+			{
+				cout<<"stack is full";
+				return true;
+			}
+			
+			return false;
+		}
+};
+
+int main(){
+	Stack obj;
+//	obj.isEmpty();
+	obj.push(5);
+	obj.isFull();
+
+	obj.peek();
+	obj.pop();
+		obj.isEmpty();
+	obj.push(7);
+}
+
+
+
+
+//implement using linked list
+
+using doubly but can do it using singly.
+#include<iostream>
+using namespace std;
+
+class Node{
+	
+	public:
+		int data;
+	Node* next;
+	Node* prev;
+		Node(int x){
+			data=x;
+			next=NULL;
+			prev=NULL;
+		}
+		~Node(){
+			delete next;
+			delete prev;
+		}
+};
+class Stack{
+	Node* head;
+	Node* tail;
+	public:
+		Stack(){
+			head=NULL;
+			tail=NULL;
+		}
+		int peek(){
+			if(!isEmpty()){
+				return tail->data;
+			}
+		}
+		
+		void push(int x){
+		if(head==NULL)
+		{
+			head=new Node(x);
+			tail=head;
+			return;
+		}
+		Node* temp=new Node(x);
+		temp->prev=tail;
+		tail->next=temp;
+		tail=temp;
+		}
+		void pop(){
+			if(tail==NULL)return;
+			Node* temp=tail;
+			if(tail==head){
+				head=NULL;
+				tail=NULL;
+				delete temp;
+				return;
+			}
+			tail=tail->prev;
+			delete temp;
+		}
+		bool isEmpty(){
+			if(tail==NULL)return true;
+			return false;
+		}
+};
+
+int main(){
+	Stack obj;
+//	obj.isEmpty();
+	obj.push(5);
+//	obj.isFull();
+
+cout<<	obj.peek();
+//	obj.pop();
+		obj.isEmpty();
+	obj.push(7);
+		obj.push(71);
+			obj.push(17);
+				
+	cout<<obj.peek();
+}
